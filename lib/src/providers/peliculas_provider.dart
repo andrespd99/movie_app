@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:movie_app/src/models/actores_model.dart';
 import 'package:movie_app/src/models/pelicula_model.dart';
 
 class PeliculasProvider {
@@ -29,8 +30,9 @@ class PeliculasProvider {
 
 
   Future<List<Pelicula>> _procesarRespuesta(Uri url) async {
+    
     final resp = await http.get( url );
-    final decodedData = json.decode(resp.body);
+    final decodedData = json.decode( resp.body );
 
     final peliculas = new Peliculas.fromJsonList(decodedData['results']);
 
@@ -61,16 +63,35 @@ class PeliculasProvider {
       'page'      : _popularesPage.toString(),
     });
 
-    
-    print(url);
-
     final resp = await _procesarRespuesta(url); 
+
 
     _populares.addAll(resp);
     popularesSink( _populares );
 
     _cargando = false;
     return resp;
+
+  }
+
+  Future<List<Actor>> getCast( String movieId ) async {
+    
+    /* Primero construimos el URL */
+    final url = Uri.https(_url, '/movie/$movieId/credits', {
+        'api_key'   : _apiKey,
+        'language'  : _language,
+    });
+
+    /* Ahora guardamos la respuesta de la solicitud GET a dicho URL */
+    final resp = await http.get(url);
+    /* De esa respuesta, extraemos el body que es el Map del contenido del JSON  */
+    /* decodedData es de tipo Map */
+    final decodedData = json.decode( resp.body );
+    /* Extraemos de ese Map el contenido del atributo cast y lo convertimos en un objeto de tipo
+      Cast */
+    final cast = new Cast.fromJsonList( decodedData['cast'] );
+    /* Retornamos la lista de actores del objeto Cast */
+    return cast.actores;
 
   }
 
