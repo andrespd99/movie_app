@@ -5,6 +5,7 @@ import 'package:movie_app/src/widgets/card_swiper_widget.dart';
 import 'package:movie_app/src/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
+  
   final peliculasProvider = new PeliculasProvider();
 
   @override
@@ -77,8 +78,8 @@ class HomePage extends StatelessWidget {
               : Container(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Center(
-                  child: CircularProgressIndicator()
-                )
+                  child: CircularProgressIndicator(),
+                ),
               );
             },
           ),

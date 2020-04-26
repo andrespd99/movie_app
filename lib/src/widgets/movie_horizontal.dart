@@ -36,7 +36,8 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    return Container(
+    
+    final tarjeta = Container(
         margin: EdgeInsets.only(right: 15.0),
         child: Column(
           children: <Widget>[
@@ -64,38 +65,47 @@ class MovieHorizontal extends StatelessWidget {
           ],
         ),
       );
+      
+    return GestureDetector(
+      child: tarjeta,
+      onTap: () {
+        Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+      },
+    );
+
   }
 
-  List<Widget> _tarjetas(BuildContext context) {
-    return peliculas.map((pelicula) {
-      return Container(
-        margin: EdgeInsets.only(right: 15.0),
-        child: Column(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: FadeInImage(
-                  placeholder: AssetImage('assets/img/no-image.jpg'),
-                  image: NetworkImage(pelicula.getPosterImg()),
-                  fit: BoxFit.cover,
-                  height: 160.0),
-            ),
-            SizedBox(height: 3.0),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding: EdgeInsets.only(left: 3.0),
-                child: Text(
-                  pelicula.title, 
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-            )
-          ],
-        ),
-      );
-    }).toList();
-  }
+//Tarjeta vieja.
+//   List<Widget> _tarjetas(BuildContext context) {
+//     return peliculas.map((pelicula) {
+//       return Container(
+//         margin: EdgeInsets.only(right: 15.0),
+//         child: Column(
+//           children: <Widget>[
+//             ClipRRect(
+//               borderRadius: BorderRadius.circular(5),
+//               child: FadeInImage(
+//                   placeholder: AssetImage('assets/img/no-image.jpg'),
+//                   image: NetworkImage(pelicula.getPosterImg()),
+//                   fit: BoxFit.cover,
+//                   height: 160.0),
+//             ),
+//             SizedBox(height: 3.0),
+//             Align(
+//               alignment: Alignment.centerLeft,
+//               child: Container(
+//                 padding: EdgeInsets.only(left: 3.0),
+//                 child: Text(
+//                   pelicula.title, 
+//                   overflow: TextOverflow.ellipsis,
+//                   maxLines: 2,
+//                   style: Theme.of(context).textTheme.caption,
+//                 ),
+//               ),
+//             )
+//           ],
+//         ),
+//       );
+//     }).toList();
+//   }
 }
