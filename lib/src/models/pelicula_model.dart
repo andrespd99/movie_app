@@ -77,4 +77,14 @@ class Pelicula {
     }
   }
 
+  getBackdropImg() {
+
+      if ( posterPath == null ) {
+        return 'https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg';
+      } else {
+        return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+      }
+  }
+
+
 }
