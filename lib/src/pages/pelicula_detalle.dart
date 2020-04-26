@@ -12,9 +12,33 @@ class PeliculaDetalle extends StatelessWidget {
     return Scaffold(
 
       body: Center(
-        child: Text( pelicula.title ),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            _crearAppBar( pelicula ),
+          ],
+
+        ),
       ),
 
     );
   }
+
+  Widget _crearAppBar( Pelicula pelicula ) {
+
+    return SliverAppBar(
+
+      elevation: 2.0,
+      backgroundColor: Colors.pinkAccent,
+      expandedHeight: 200.0,
+      floating: false,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
+        title: Text( pelicula.title ),
+      ),
+
+    );
+
+  }
+
 }
