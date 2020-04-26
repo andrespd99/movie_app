@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:movie_app/src/models/actores_model.dart';
 import 'package:movie_app/src/models/pelicula_model.dart';
+import 'package:movie_app/src/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
   
@@ -22,9 +25,9 @@ class PeliculaDetalle extends StatelessWidget {
                   SizedBox(height: 20.0),
                   _posterTitulo( context, pelicula ),
                   _descripcion(pelicula),
-                  _descripcion(pelicula),
-                  _descripcion(pelicula),
-                  _descripcion(pelicula),
+                  SizedBox(height: 20.0),
+                  _crearCasting(pelicula),
+                  SizedBox(height: 50.0),
                 ]
               ),
             )
@@ -49,10 +52,13 @@ class PeliculaDetalle extends StatelessWidget {
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        title: Text(
-          pelicula.title,
-          style: TextStyle(color: Colors.white, fontSize: 16.0,),
-          textAlign: TextAlign.center,
+        title: Container(
+          width: screenSize.width * 0.6,
+          child: Text(
+            pelicula.title,
+            style: TextStyle(color: Colors.white, fontSize: 16.0,),
+            textAlign: TextAlign.center,
+          ),
         ),
           background: FadeInImage(
             image: NetworkImage(pelicula.getBackdropImg()),
@@ -79,11 +85,14 @@ class PeliculaDetalle extends StatelessWidget {
                 )
               ]
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(7.0),
-              child: Image(
-                image: NetworkImage( pelicula.getPosterImg() ),
-                height: 160.0,
+            child: Hero(
+              tag: pelicula.uniqueId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7.0),
+                child: Image(
+                  image: NetworkImage( pelicula.getPosterImg() ),
+                  height: 160.0,
+                ),
               ),
             ),
           ),
@@ -120,5 +129,79 @@ class PeliculaDetalle extends StatelessWidget {
     );
 
   }
+
+  Widget _crearCasting( Pelicula pelicula ) {
+    
+    final peliculasProvider = new PeliculasProvider();
+
+    return FutureBuilder(
+      future: peliculasProvider.getCast( pelicula.id.toString() ),
+      builder: (context, AsyncSnapshot<List<Actor>> snapshot) {
+        
+        if( snapshot.hasData ) {
+          return _crearActoresPageView( snapshot.data );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+
+  }
+
+  Widget _crearActoresPageView( List<Actor> actores ) {
+
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1
+        ),
+        pageSnapping: false,
+        itemCount: actores.length,
+        itemBuilder: (context, i) {
+
+          return _tarjetaActor( context, actores[i] );
+
+        }
+      ),
+    );
+
+  }
+
+  Widget _tarjetaActor( BuildContext context, Actor actor ) {
+
+    return Container(
+      margin: EdgeInsets.only(right: 10.0),
+      // color: Colors.red,
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(7.0),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/img/actor-placeholder.jpg'),
+              image: NetworkImage( actor.getActorPhoto() ),
+              fit: BoxFit.cover,
+              height: 165.0,
+            ),
+          ),
+          SizedBox( height: 5.0 ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 3.0),
+              child: Text(
+                actor.name,
+                style: Theme.of(context).textTheme.caption,
+                overflow: TextOverflow.ellipsis,  
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+
+  }
+
 
 }
