@@ -1,7 +1,7 @@
 
 class Cast {
 
-  List<Actor> actores = new List();
+  List<Actor> actors = new List();
 
   Cast();
 
@@ -9,9 +9,9 @@ class Cast {
 
     if( jsonList == null ) return;
 
-    jsonList.forEach( ( item ) {
-      final actor = Actor.fromJsonMap(item);
-      actores.add(actor);
+    jsonList.forEach( ( actor ) {
+      final newActor = Actor.fromJsonMap(actor);
+      actors.add( newActor );
     });    
   }
 }

@@ -3,73 +3,73 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:movie_app/src/models/actores_model.dart';
-import 'package:movie_app/src/models/pelicula_model.dart';
+import 'package:movie_app/src/models/cast_model.dart';
+import 'package:movie_app/src/models/movie_model.dart';
 
-class PeliculasProvider {
+class MoviesProvider {
 
   String _apiKey = '33f176cad5a87619b85dc9788614f8f5';
   String _url = 'api.themoviedb.org';
   String _language = 'es';
 
-  int _popularesPage = 0;
-  bool _cargando = false;
+  int _popularPage = 0;
+  bool _loading = false;
   
-  List<Pelicula> _populares = new List();
+  List<Movie> _popular = new List();
   
-  final _popularesStreamController = StreamController<List<Pelicula>>.broadcast();
+  final _popularStreamController = StreamController<List<Movie>>.broadcast();
 
-  Function(List<Pelicula>) get popularesSink => _popularesStreamController.sink.add;
+  Function(List<Movie>) get popularSink => _popularStreamController.sink.add;
   
-  Stream<List<Pelicula>> get popularesStream => _popularesStreamController.stream;
+  Stream<List<Movie>> get popularStream => _popularStreamController.stream;
   
 
   void disposeStreams() {
-    _popularesStreamController?.close();
+    _popularStreamController?.close();
   }
 
 
-  Future<List<Pelicula>> _procesarRespuesta(Uri url) async {
+  Future<List<Movie>> _processResponse(Uri url) async {
     
     final resp = await http.get( url );
     final decodedData = json.decode( resp.body );
 
-    final peliculas = new Peliculas.fromJsonList(decodedData['results']);
+    final movies = new Movies.fromJsonList(decodedData['results']);
 
-    return peliculas.items;
+    return movies.movieList;
   }
 
-  Future<List<Pelicula>> getEnCines() async {
+  Future<List<Movie>> getOnScreen() async {
 
     final url = Uri.https(_url, "3/movie/now_playing", {
       'api_key' : _apiKey,
       'language': _language
     });
     
-    return await _procesarRespuesta(url);
+    return await _processResponse(url);
   }
 
-  Future<List<Pelicula>> getPopulares() async {
+  Future<List<Movie>> getPopular() async {
 
-    if ( _cargando ) return [];
+    if ( _loading ) return [];
 
-    _cargando = true;
+    _loading = true;
 
-    _popularesPage++;
+    _popularPage++;
 
     final url = Uri.https(_url, '3/movie/popular', {
       'api_key'   : _apiKey,
       'language'  : _language,
-      'page'      : _popularesPage.toString(),
+      'page'      : _popularPage.toString(),
     });
 
-    final resp = await _procesarRespuesta(url); 
+    final resp = await _processResponse(url); 
 
 
-    _populares.addAll(resp);
-    popularesSink( _populares );
+    _popular.addAll(resp);
+    popularSink( _popular );
 
-    _cargando = false;
+    _loading = false;
     return resp;
 
   }
@@ -92,8 +92,19 @@ class PeliculasProvider {
       Cast */
     final cast = new Cast.fromJsonList( decodedData['cast'] );
     /* Retornamos la lista de actores del objeto Cast */
-    return cast.actores;
+    return cast.actors;
 
+  }
+
+  Future<List<Movie>> searchMovie( String query ) async {
+
+    final url = Uri.https(_url, "3/search/movie", {
+      'api_key' : _apiKey,
+      'language': _language,
+      'query'   : query,
+    });
+    
+    return await _processResponse(url);
   }
 
 }

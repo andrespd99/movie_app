@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:movie_app/src/providers/peliculas_provider.dart';
+import 'package:movie_app/search/search_delegate.dart';
+
 import 'package:movie_app/src/widgets/card_swiper_widget.dart';
 import 'package:movie_app/src/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
   
-  final peliculasProvider = new PeliculasProvider();
+  final moviesProvider = new MoviesProvider();
 
   @override
   Widget build(BuildContext context) {
 
-    peliculasProvider.getPopulares();
+    moviesProvider.getPopular();
 
     return Scaffold(
         appBar: AppBar(
@@ -23,9 +24,9 @@ class HomePage extends StatelessWidget {
               icon: Icon(Icons.search),
               onPressed: () {
                 showSearch(
-                  context: null, 
-                  delegate: null
-                )
+                  context: context, 
+                  delegate: DataSearch()
+                );
               },
             )
           ],
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              _swiperTarjetas(),
+              _swiperCards(),
               SizedBox(height: 25.0),
               _footer(context),  
             ],
@@ -42,12 +43,12 @@ class HomePage extends StatelessWidget {
         ));
   }
 
-  Widget _swiperTarjetas() {
+  Widget _swiperCards() {
     return FutureBuilder(
-      future: peliculasProvider.getEnCines(),
+      future: moviesProvider.getOnScreen(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          return CardSwiper(peliculas: snapshot.data);
+          return CardSwiper(movies: snapshot.data);
         } else {
           return Container(
             height: MediaQuery.of(context).size.height * 0.53,
@@ -73,12 +74,12 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(height: 15.0),
           StreamBuilder(
-            stream: peliculasProvider.popularesStream,
+            stream: moviesProvider.popularStream,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               return snapshot.hasData
               ? MovieHorizontal(
-                  peliculas: snapshot.data,
-                  siguientePagina: peliculasProvider.getPopulares,                  
+                  movies: snapshot.data,
+                  nextPage: moviesProvider.getPopular,                  
                 )
               : Container(
                 height: MediaQuery.of(context).size.height * 0.2,
