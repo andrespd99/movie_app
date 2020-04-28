@@ -13,9 +13,13 @@ class MoviesProvider {
   String _language = 'es';
 
   int _popularPage = 0;
+  // int _searchPage = 0;
+
+
   bool _loading = false;
   
   List<Movie> _popular = new List();
+  List<Movie> _searchResults = new List();
   
   final _popularStreamController = StreamController<List<Movie>>.broadcast();
 
@@ -105,6 +109,38 @@ class MoviesProvider {
     });
     
     return await _processResponse(url);
+  }
+
+  Future<List<Movie>> getSearchResults( String query, int searchPage ) async {
+
+    if ( _loading ) return [];
+
+    _loading = true;
+
+    // searchPage++;
+    print('PAGINAAAAAAAAAAA $searchPage');
+
+    final url = Uri.https(_url, '3/search/movie', {
+      'api_key'   : _apiKey,
+      'language'  : _language,
+      'query'     : query,
+      'page'      : searchPage.toString(),
+    });
+
+    print(url);
+
+    final resp = await _processResponse(url); 
+
+    print(resp);
+
+    _searchResults.addAll(resp);
+    popularSink( _searchResults );
+
+    _loading = false;
+
+
+    return resp;
+
   }
 
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/pages/search_results_page.dart';
 import 'package:movie_app/src/providers/peliculas_provider.dart';
 
 import 'package:movie_app/src/models/movie_model.dart';
@@ -6,11 +7,12 @@ import 'package:movie_app/src/models/movie_model.dart';
 class DataSearch extends SearchDelegate {
 
   String seleccion = "";
-  final peliculasProvider = new MoviesProvider();
+
+  final moviesProvider = new MoviesProvider();
 
   final cachedMovies = List<Movie>();
 
-  final peliculasRecientes = [];
+  // final recentMovies = [];
 
 
   @override
@@ -48,7 +50,8 @@ class DataSearch extends SearchDelegate {
       return Container();
     } else {      
 
-      return _getMovieSearch();
+      return _getSearchResults();
+      // return _getMovieSearch();
     }
   }
 
@@ -68,34 +71,34 @@ class DataSearch extends SearchDelegate {
 
   FutureBuilder<List<Movie>> _getMovieSearch() {
     return FutureBuilder (
-        future: peliculasProvider.searchMovie( query ),
+        future: moviesProvider.searchMovie( query ),
         builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
 
           if( snapshot.hasData ){
             
-            final peliculas = snapshot.data;
+            final movies = snapshot.data;
             
             return ListView(
-              children: peliculas.map( (pelicula) {
+              children: movies.map( (movie) {
 
-                pelicula.uniqueId = '${pelicula.id}-search';
+                movie.uniqueId = '${movie.id}-search';
 
                 return ListTile(
                   leading: Hero(
-                      tag: pelicula.uniqueId,
+                      tag: movie.uniqueId,
                       child: FadeInImage(
                       placeholder: AssetImage( 'assets/img/no-image.jpg' ), 
-                      image: NetworkImage( pelicula.getPosterImg() ),
+                      image: NetworkImage( movie.getPosterImg() ),
                       width: 50.0,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  title: Text( pelicula.title ),
-                  subtitle: Text( pelicula.originalTitle ),
+                  title: Text( movie.title ),
+                  subtitle: Text( movie.originalTitle ),
                   onTap: () {
                     // close( context, null );
-                    pelicula.uniqueId = '${pelicula.id}-search';
-                    Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+                    movie.uniqueId = '${movie.id}-search';
+                    Navigator.pushNamed(context, 'detail', arguments: movie);
                   },
                 );
               }).toList()
@@ -109,6 +112,30 @@ class DataSearch extends SearchDelegate {
         },
         
       );
+  }
+
+  FutureBuilder<List<Movie>> _getSearchResults () {
+
+    final searchPage = 1;
+
+    return FutureBuilder(
+      future: moviesProvider.getSearchResults( query, searchPage ),
+      builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
+
+        if(snapshot.hasData){
+          return SearchResults( 
+            movies: snapshot.data, 
+            nextPage: moviesProvider.getSearchResults,
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+
+
+      },
+
+    );
+
   }
 
 

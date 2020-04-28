@@ -1,0 +1,421 @@
+{
+    "page": 1,
+    "total_results": 114,
+    "total_pages": 6,
+    "results": [
+        {
+            "popularity": 33.495,
+            "id": 272,
+            "video": false,
+            "vote_count": 14085,
+            "vote_average": 7.7,
+            "title": "Batman Begins",
+            "release_date": "2005-06-10",
+            "original_language": "en",
+            "original_title": "Batman Begins",
+            "genre_ids": [
+                28,
+                80,
+                18
+            ],
+            "backdrop_path": "\/lh5lbisD4oDbEKgUxoRaZU8HVrk.jpg",
+            "adult": false,
+            "overview": "¿Cómo cambia un hombre el mundo? Es una pregunta que obsesiona a Bruce Wayne al igual que el fantasma de sus padres, muertos a tiros ante sus ojos en las calles de Gotham una noche que cambió su vida para siempre. Atormentado por la culpa y la ira, el desilusionado heredero industrial desaparece de Gotham y viaja en secreto por el mundo, buscando los medios de luchar contra la injusticia y utilizar el miedo contra los que se aprovechan de los que tienen miedo. Con la ayuda de su leal mayordomo Alfred, el detective Jim Gordon - uno de los pocos buenos policías de las fuerzas del orden público de Gotham - y Lucius Fox, su aliado en la división de Ciencias Aplicadas de Wayne Enterprises, Bruce Wayne libera a su imponente alter ego: Batman, un justiciero enmascarado que utiliza la fuerza, la inteligencia y un despliegue de artefactos de alta tecnología para combatir las fuerzas siniestras que amenazan con destruir la ciudad.",
+            "poster_path": "\/6yMWU1vWkOBbNRIwOxhetd2aHhO.jpg"
+        },
+        {
+            "popularity": 21.283,
+            "vote_count": 4630,
+            "video": false,
+            "poster_path": "\/k0f0FNZx0eBUCYiVpun9WUh0BFk.jpg",
+            "id": 268,
+            "adult": false,
+            "backdrop_path": "\/rBN6GPKUDZ6ZKAQiEZegZ0DZb6V.jpg",
+            "original_language": "en",
+            "original_title": "Batman",
+            "genre_ids": [
+                28,
+                14
+            ],
+            "title": "Batman",
+            "vote_average": 7.2,
+            "overview": "Atormentado por haber visto morir a sus padres delante suyo, Bruce Wayne se enfunda cada noche en el traje de Batman, adopta la terrorífica forma de un murciélago y surca los tejados de Gotham City combatiendo el crimen y manteniendo a raya la corrupción de su ciudad. Pero esta vez Batman tendrá que enfrentarse a su mas terrible enemigo: El Joker, que pretende someter a toda la ciudad bajo los deseos de su mente perturbada.",
+            "release_date": "1989-06-23"
+        },
+        {
+            "popularity": 29.516,
+            "id": 414,
+            "video": false,
+            "vote_count": 3272,
+            "vote_average": 5.3,
+            "title": "Batman Forever",
+            "release_date": "1995-06-16",
+            "original_language": "en",
+            "original_title": "Batman Forever",
+            "genre_ids": [
+                28,
+                80,
+                14
+            ],
+            "backdrop_path": "\/snlu32RmjldF9b068UURJg8sQtn.jpg",
+            "adult": false,
+            "overview": "La ciudad de Gotham está amenazada de nuevo. Esta vez, se trata de una maligna pareja compuesta por Dos Caras y Enigma, que procurarán alterar la paz de sus conciudadanos y del mundo entero para siempre. Por este motivo, Bruce Wayne deberá enfundarse otra vez el traje de Batman y luchar contra ellos; pero esta vez no estará solo, ya que será acompañado por el joven Robin.",
+            "poster_path": "\/wg6BN76E9iIEtiawMJnCecY0zgY.jpg"
+        },
+        {
+            "popularity": 21.942,
+            "vote_count": 3178,
+            "video": false,
+            "poster_path": "\/gJAvyXHdIjeKHS07Dlim7LETBEK.jpg",
+            "id": 415,
+            "adult": false,
+            "backdrop_path": "\/tgPFZxhDuxWd4VXYaz8eAUznGTF.jpg",
+            "original_language": "en",
+            "original_title": "Batman & Robin",
+            "genre_ids": [
+                28,
+                35,
+                14,
+                878
+            ],
+            "title": "Batman y Robin",
+            "vote_average": 4.3,
+            "overview": "Unos experimentos de criogenia han convertido al Dr. Victor Fries en el malvado Mr. Freeze, un villano que necesita mantener su cuerpo a temperaturas gélidas y que, por ello, intentará congelar a todos los habitantes de la ciudad de Gotham. Por otro lado, la tímida botánica Pamela Isley se transformará en el transcurso de un experimento en la terrible Hiedra Venenosa, que querrá asesinar a todos los seres humanos de la tierra, para que las plantas recuperen su hegemonía sobre el planeta. Por este motivo, Batman y Robin deberán enfrentarse a ellos y detener sus siniestros planes.",
+            "release_date": "1997-06-20"
+        },
+        {
+            "popularity": 17.657,
+            "id": 364,
+            "video": false,
+            "vote_count": 3851,
+            "vote_average": 6.8,
+            "title": "Batman vuelve",
+            "release_date": "1992-06-19",
+            "original_language": "en",
+            "original_title": "Batman Returns",
+            "genre_ids": [
+                28,
+                14
+            ],
+            "backdrop_path": "\/bkl2EXe1ILOn03anF42ZVdWQLwH.jpg",
+            "adult": false,
+            "overview": "Gotham City se enfrenta a dos nuevos y peculiares criminales: el diabólico y siniestro Pingüino, una criatura solitaria y extrañamente deformada, y la hermosa y seductora -aunque letalmente peligrosa- Catwoman. Batman se deberá enfrentar a Pingüino, que quiere convertirse en el amo de la ciudad.",
+            "poster_path": "\/yDPuOwLbPCgn0BCWKL0giLO5zWk.jpg"
+        },
+        {
+            "popularity": 9.471,
+            "vote_count": 439,
+            "video": false,
+            "poster_path": "\/iBaHizz1sfMs4N03aHsGe7I2G6S.jpg",
+            "id": 2661,
+            "adult": false,
+            "backdrop_path": "\/gwXMBVAsLvNcZuzWDEswexdqNLa.jpg",
+            "original_language": "en",
+            "original_title": "Batman",
+            "genre_ids": [
+                12,
+                35,
+                80,
+                878,
+                10751
+            ],
+            "title": "Batman: La película",
+            "vote_average": 6.2,
+            "overview": "Adaptación a la gran pantalla del popular cómic de Bob Kane, que ese mismo año y con los mismos protagonistas conocía una exitosa versión en formato de serie de televisión que duraría dos años en la pequeña pantalla. Batman y Robin se enfrentan a un grupo de criminales entre los que se encuentran sus eternos rivales Joker y El Pingüino, quienes se han apoderado de un sofisticado artilugio para dominar el mundo.",
+            "release_date": "1966-07-30"
+        },
+        {
+            "popularity": 13.773,
+            "vote_count": 458,
+            "video": false,
+            "poster_path": "\/dBGUumJAdaNiJTFI6pkeHVVFwH8.jpg",
+            "id": 321528,
+            "adult": false,
+            "backdrop_path": "\/r7JUBp8WyadE6AljspzF6mo5hmP.jpg",
+            "original_language": "en",
+            "original_title": "Batman vs. Robin",
+            "genre_ids": [
+                28,
+                12,
+                16
+            ],
+            "title": "Batman vs Robin",
+            "vote_average": 7,
+            "overview": "Tras unos siniestros acontecimientos, Batman descubre la sociedad secreta de los Búhos, que controla Gotham desde las sombras desde hace más de 200 años.",
+            "release_date": "2015-04-14"
+        },
+        {
+            "popularity": 12.074,
+            "vote_count": 259,
+            "video": false,
+            "poster_path": "\/eiVQORVyVuNNZHPAELuWtlXoQsD.jpg",
+            "id": 537056,
+            "adult": false,
+            "backdrop_path": "\/eevJuYAitUe6VwFN29aFwzeyeTr.jpg",
+            "original_language": "en",
+            "original_title": "Batman: Hush",
+            "genre_ids": [
+                28,
+                16,
+                80,
+                9648
+            ],
+            "title": "Batman: Hush",
+            "vote_average": 6.9,
+            "overview": "Un nuevo villano de quien sólo se conoce el nombre, \"Hush\", emplea a todos los enemigos de Gotham para destruir la vida tanto de Batman, el héroe, como la de Bruce Wayne, el empresario y playboy que ahora mantiene una relación íntima con Selina Kyle, también conocida como \"Catwoman\". Adaptación de uno de los grandes clásicos del universo DC: \"Batman: Hush\" escrito por Jeph Loeb y dibujado por Jim Lee.",
+            "release_date": "2019-07-19"
+        },
+        {
+            "popularity": 14.221,
+            "vote_count": 355,
+            "video": false,
+            "poster_path": "\/uVdxoD9kn28qC8VQiVA6Uif1QHl.jpg",
+            "id": 408648,
+            "adult": false,
+            "backdrop_path": "\/2JVnUtyUKbQm165cXUF9r5iVPDo.jpg",
+            "original_language": "en",
+            "original_title": "Batman and Harley Quinn",
+            "genre_ids": [
+                28,
+                12,
+                16,
+                878
+            ],
+            "title": "Batman y Harley Quinn",
+            "vote_average": 6,
+            "overview": "Batman y Nighwing deberán unir fuerzas con Harley Quinn para frenar la amenaza global de Hiedra Venenosa",
+            "release_date": "2017-08-14"
+        },
+        {
+            "popularity": 31.895,
+            "vote_count": 13193,
+            "video": false,
+            "poster_path": "\/mS3t9puIjLKgoex82cu9d6G0835.jpg",
+            "id": 209112,
+            "adult": false,
+            "backdrop_path": "\/doiUtOHzcxXFl0GVQ2n8Ay6Pirx.jpg",
+            "original_language": "en",
+            "original_title": "Batman v Superman: Dawn of Justice",
+            "genre_ids": [
+                28,
+                12,
+                14
+            ],
+            "title": "Batman v. Superman: El amanecer de la justicia",
+            "vote_average": 5.8,
+            "overview": "Ante el temor de las acciones que pueda llevar a cabo Superman, el vigilante de Gotham City aparece para poner a raya al superhéroe de Metrópolis, mientras que la opinión pública debate cuál es realmente el héroe que necesitan. El hombre de acero y Batman se sumergen en una contienda territorial, pero las cosas se complican cuando una nueva y peligrosa amenaza surge rápidamente, poniendo en jaque la existencia de la humanidad.",
+            "release_date": "2016-03-23"
+        },
+        {
+            "popularity": 10.284,
+            "vote_count": 72,
+            "video": false,
+            "poster_path": "\/yTbj8Kcp4WFwMRdEejnn55KIsfH.jpg",
+            "id": 464882,
+            "adult": false,
+            "backdrop_path": "\/olwINcffzDRt8MMCamlptD3Hbjj.jpg",
+            "original_language": "en",
+            "original_title": "Batman vs. Two-Face",
+            "genre_ids": [
+                28,
+                16,
+                35
+            ],
+            "title": "Batman Vs. Dos Caras",
+            "vote_average": 6.3,
+            "overview": "En la Penitenciaría de Gotham, en presencia de Batman, Robin y el Fiscal de Distrito Harvey Dent, el Dr. Hugo Strange y su asistente, Dr. Harleen Quinzel, realizan un experimento en cinco presos; Joker, Penguin, Riddler, Egghead y Mr. Freeze en un intento de eliminar su mal con una máquina llamada Evil Extractor. El experimento funciona mal y Harvey se expone a un gas marcándole el lado izquierdo de su cara y que hace que éste se convierta en Dos Caras.",
+            "release_date": "2017-11-14"
+        },
+        {
+            "popularity": 7.24,
+            "vote_count": 36,
+            "video": false,
+            "poster_path": "\/gc1oyq0K8TdtFTXmYV03v536HsI.jpg",
+            "id": 456348,
+            "adult": false,
+            "backdrop_path": "\/u82RurwuuaHlnv0SWEpSSK8T7a8.jpg",
+            "original_language": "en",
+            "original_title": "Batman & Bill",
+            "genre_ids": [
+                99
+            ],
+            "title": "Batman & Bill",
+            "vote_average": 7.8,
+            "overview": "",
+            "release_date": "2017-05-06"
+        },
+        {
+            "popularity": 10.356,
+            "vote_count": 500,
+            "video": false,
+            "poster_path": "\/mLZRhulJcDsxZWTdfx0trtk6y07.jpg",
+            "id": 69735,
+            "adult": false,
+            "backdrop_path": "\/bNMw3onveTYU7PpLQRK0HQK8JRb.jpg",
+            "original_language": "en",
+            "original_title": "Batman: Year One",
+            "genre_ids": [
+                28,
+                12,
+                16,
+                80,
+                9648
+            ],
+            "title": "Batman: Año Uno",
+            "vote_average": 7.2,
+            "overview": "Adaptación animada del aclamado cómic de Frank Miller. La historia del original cuenta los inicios de la carrera de Bruce Wayne como Batman y de James Gordon con el Departamento de Policía de Gotham City. La vida de estos dos individuos se entrelazan cuando descubren que son aliados en contra de los poderes corruptos en Gotham City. La historia también incluye la primera aparición del capo de la mafia Carmine Falcone.",
+            "release_date": "2011-09-27"
+        },
+        {
+            "popularity": 11.383,
+            "vote_count": 215,
+            "video": false,
+            "poster_path": "\/eIeT9dsFeKiKNxjWyXHTL92TTrJ.jpg",
+            "id": 15805,
+            "adult": false,
+            "backdrop_path": "\/3jU5X8XkrD6ue8jiCRIrVMPv2ah.jpg",
+            "original_language": "en",
+            "original_title": "Batman & Mr. Freeze: SubZero",
+            "genre_ids": [
+                28,
+                16,
+                80,
+                10751
+            ],
+            "title": "Batman: Subzero",
+            "vote_average": 6.9,
+            "overview": "Sólo en el Artico puede sobrevivir sin su traje especial Mr. Freeze. Cuando un submarino de investigación emerge bruscamente en el refugio del criminal, la esposa de éste ve interrumpido su sueño criogénico y corre el riesgo de perecer, por lo cual Freeze regresa a Gotham y secuestra a un científico experto en criogénesis, con el fin de lograr salvar a su amada. Comprobando los grupos sanguíneos afines con la misma, descubren que Barbara Gordon figura en la lista, por lo cual procederán a su secuestro...",
+            "release_date": "1998-03-17"
+        },
+        {
+            "popularity": 9.581,
+            "vote_count": 566,
+            "video": false,
+            "poster_path": "\/nj1jjSqzMaAtuGM1FmbAOOykDgX.jpg",
+            "id": 251519,
+            "adult": false,
+            "backdrop_path": "\/rSjFHjE4cCO1eCQ3VN7VRu6ZYqh.jpg",
+            "original_language": "en",
+            "original_title": "Son of Batman",
+            "genre_ids": [
+                28,
+                12,
+                16
+            ],
+            "title": "El hijo de Batman",
+            "vote_average": 6.9,
+            "overview": "Escondido en una fortaleza secreta de la cima de una montaña se encuentra la Liga de las Sombras y su intrépido líder, Ra's al Ghul. Junto con su hija igualmente peligrosa, Talia, supervisa un ejército de asesinos entrenados con planes de dominación mundial. Pero un levantamiento dentro de la Liga amenaza con desplazar el equilibrio de las fuerzas y obliga a Talia y a su joven hijo, Damian, a huir a la ciudad de Gotham. Con los asesinos siguiendo su rastro, Talia busca la protección en Batman, quien sin saberlo, es el padre del niño. A cargo de su hijo, Batman lucha contra el villano Deathstroke y la Liga de las Sombras, todo mientras enseña al testarudo de su hijo que uno no puede combatir el crimen convirtiéndose en criminal. Con la ayuda de los mejores de Gotham, incluyendo al Comisario Gordon y Nightwing, Batman descubrirá que su hijo y el aliado en quien más puede confiar son la misma persona",
+            "release_date": "2014-04-20"
+        },
+        {
+            "popularity": 13.001,
+            "vote_count": 3319,
+            "video": false,
+            "poster_path": "\/9F7OQVDMmvUJVwI7s0yzGNftC2F.jpg",
+            "id": 324849,
+            "adult": false,
+            "backdrop_path": "\/jqnbac3oind5VOcAN0mTXyapOGh.jpg",
+            "original_language": "en",
+            "original_title": "The Lego Batman Movie",
+            "genre_ids": [
+                28,
+                16,
+                35,
+                14,
+                10751
+            ],
+            "title": "Batman: La LEGO película",
+            "vote_average": 7.2,
+            "overview": "Spin-off de \"La LEGO Película\", protagonizado por Batman. En esta ocasión, el irreverente Batman, que también tiene algo de artista frustrado, intentará salvar la ciudad de Gotham de un peligroso villano, el Joker. Pero no podrá hacerlo solo, y tendrá que aprender a trabajar con sus demás aliados.",
+            "release_date": "2017-02-08"
+        },
+        {
+            "popularity": 9.844,
+            "vote_count": 407,
+            "video": false,
+            "poster_path": "\/xMDoFicHakKLNsf7v90QDWptZ8O.jpg",
+            "id": 366924,
+            "adult": false,
+            "backdrop_path": "\/cjgQ0RUdAhzykPZycigoQlmaKlx.jpg",
+            "original_language": "en",
+            "original_title": "Batman: Bad Blood",
+            "genre_ids": [
+                28,
+                16,
+                878
+            ],
+            "title": "Batman: Mala sangre",
+            "vote_average": 7,
+            "overview": "El cielo de Gotham estalla en llamas mientras Batman combate a los villanos Luciérnaga, Tusk y La Polilla Asesina. Pero cuando vuelve la claridad, Batman desaparece y la misteriosa Batwoman es la única testigo de lo ocurrido. Ahora, sin recibir respuesta a la Bat-Señal y con la ciudad al borde del caos, Ala Nocturna y Robin deben crear una complicada alianza con Batwoman y el recién llegado Batwing. Juntos lucharán para descubrir el siniestro complot que involucra a un nuevo y monstruoso villano conocido como Heretic.",
+            "release_date": "2016-03-22"
+        },
+        {
+            "popularity": 8.584,
+            "vote_count": 150,
+            "video": false,
+            "poster_path": "\/8uKIqZBXfxhflenI2LkNZIHUp7I.jpg",
+            "id": 20077,
+            "adult": false,
+            "backdrop_path": "\/mkRHL1q50bx6uqTXa37DXdgeYvV.jpg",
+            "original_language": "en",
+            "original_title": "The Batman vs. Dracula",
+            "genre_ids": [
+                28,
+                16,
+                18,
+                14,
+                27,
+                9648,
+                878,
+                53,
+                10751
+            ],
+            "title": "Batman contra Drácula",
+            "vote_average": 6.4,
+            "overview": "La oscuridad se ha apoderado de la ciudad de Gotham. La criatura más terrorífica de la noche, Drácula, está aterrorizando a toda la ciudad mientras que Batman, el hombre Murcélago, hace todo lo posible por detenerle. Pero Drácula no es un enemigo corriente; está dotado de una serie de poderes sobrenaturales que le aportan una increíble fuerza, velocidad y control mental y, aunque Batman es un super-héroe, no deja de ser un mortal.",
+            "release_date": "2005-10-18"
+        },
+        {
+            "popularity": 9.644,
+            "vote_count": 27,
+            "video": false,
+            "poster_path": "\/rA5bdwbzEAKfvjHRzza6Q3r0otq.jpg",
+            "id": 602307,
+            "adult": false,
+            "backdrop_path": "\/q9vHpzQGzlU1da3crwMLyaTF9zb.jpg",
+            "original_language": "en",
+            "original_title": "Lego DC Batman: Family Matters",
+            "genre_ids": [
+                16,
+                10751
+            ],
+            "title": "LEGO DC: Batman - La Bat-familia importa",
+            "vote_average": 6.2,
+            "overview": "En LEGO DC: Batman - Family Matters, las sospechas aumentan luego de que Batman, Batgirl, Robin y otros superhéroes de DC reciban invitaciones misteriosas. Sin embargo, los valores familiares deben permanecer fuertes cuando Batman y su equipo se encuentran con el villano Hood Rojo, quien está obsesionado con destruir a la familia Bat y toda la ciudad de Gotham.",
+            "release_date": "2019-07-21"
+        },
+        {
+            "popularity": 4.372,
+            "vote_count": 18,
+            "video": false,
+            "poster_path": "\/hyrAiphvDoBRJ6BPy4lLFVwZfQu.jpg",
+            "id": 125249,
+            "adult": false,
+            "backdrop_path": "\/xEG5iP1qZCiDt4BefSpLy1d54zE.jpg",
+            "original_language": "en",
+            "original_title": "Batman",
+            "genre_ids": [
+                28,
+                12,
+                80,
+                878,
+                53,
+                10752
+            ],
+            "title": "Batman",
+            "vote_average": 6.3,
+            "overview": "",
+            "release_date": "1943-07-16"
+        }
+    ]
+}
