@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:movie_app/src/models/movie_model.dart';
+import 'package:movie_app/src/pages/movie_details_page.dart';
 
 class MovieHorizontal extends StatelessWidget {
 
@@ -76,7 +78,10 @@ class MovieHorizontal extends StatelessWidget {
     return GestureDetector(
       child: card,
       onTap: () {
-        Navigator.pushNamed(context, 'detail', arguments: movie);
+        Navigator.pushNamed(
+          context, 'detail', 
+          arguments: MovieDetailsArguments(movie),
+        );
       },
     );
 

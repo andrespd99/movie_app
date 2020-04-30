@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/pages/movie_details_page.dart';
 import 'package:movie_app/src/pages/search_results_page.dart';
 import 'package:movie_app/src/providers/peliculas_provider.dart';
 
 import 'package:movie_app/src/models/movie_model.dart';
 
 class DataSearch extends SearchDelegate {
-
-  String seleccion = "";
-
+  
   final moviesProvider = new MoviesProvider();
 
-  final cachedMovies = List<Movie>();
+  final popularMovies = new List<Movie>();
+
+  final lastSearchMovies = List<Movie>();
+
 
   // final recentMovies = [];
 
@@ -47,7 +49,9 @@ class DataSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     /* Crea los resultados que vamos a mostrar */
     if( query.isEmpty ) {
-      return Container();
+      return Center(
+        child: Text('Type up something to look for'),
+      );
     } else {      
 
       return _getSearchResults();
@@ -58,9 +62,51 @@ class DataSearch extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     /* Son las sugerencias que aparecen cuando el usuario escribe */
-    
+    popularMovies.clear();
+    /* Obtenemos las peliculas populares del momento */
+    moviesProvider.getPopular().then( (p) => popularMovies.addAll(p.toList()) );
+
     if( query.isEmpty ) {
-      return Container();
+      return StreamBuilder(
+        stream: moviesProvider.popularStream,
+        builder: ( context, AsyncSnapshot<List<Movie>> snapshot ) {
+          if(!snapshot.hasData) {
+            return Center(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );        
+          } 
+
+
+          return ListView(
+            children: <Widget> [
+              SizedBox(height: 5.0),
+              ListTile(
+                title: Text(
+                  "Trending", 
+                  style: Theme.of(context).textTheme.title,
+                ),
+              ),
+              Divider( height: 3.0 )
+            ] +
+              snapshot.data.map<ListTile>( (movie) {
+                return ListTile(
+                  title: Text(
+                    movie.title, 
+                    style: TextStyle(color: Colors.pinkAccent),),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context, 'detail', 
+                      arguments: MovieDetailsArguments( movie, hasHero: false ),
+                    );
+                  },
+                );
+              }).toList(),
+          );
+
+        }
+      );
     } else {
       
       return _getMovieSearch();
@@ -84,24 +130,35 @@ class DataSearch extends SearchDelegate {
                 movie.uniqueId = '${movie.id}-search';
 
                 return ListTile(
-                  leading: Hero(
-                      tag: movie.uniqueId,
-                      child: FadeInImage(
-                      placeholder: AssetImage( 'assets/img/no-image.jpg' ), 
-                      image: NetworkImage( movie.getPosterImg() ),
-                      width: 50.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  leading: _leadingPoster( movie ),
                   title: Text( movie.title ),
                   subtitle: Text( movie.originalTitle ),
                   onTap: () {
                     // close( context, null );
                     movie.uniqueId = '${movie.id}-search';
-                    Navigator.pushNamed(context, 'detail', arguments: movie);
+                    Navigator.pushNamed(
+                      context, 'detail', 
+                      arguments: MovieDetailsArguments(movie),
+                    );
                   },
                 );
-              }).toList()
+              }).toList() + [
+
+                ListTile(
+                  title: Text(
+                    'Show more results',
+                    style: Theme.of(context)
+                                .textTheme
+                                .subtitle
+                                .copyWith(fontSize: 15.0, color: Colors.pinkAccent),
+                    textAlign: TextAlign.center,
+                    
+                  ),
+                  onTap: () {
+                    this.showResults(context);
+                  },
+                ),
+              ]
             );
           } else {
             return Center(
@@ -134,6 +191,20 @@ class DataSearch extends SearchDelegate {
 
       },
 
+    );
+
+  }
+
+  Widget _leadingPoster( Movie movie ) {
+
+    return Hero(
+      tag: movie.uniqueId,
+      child: FadeInImage(
+        placeholder: AssetImage( 'assets/img/no-image.jpg' ), 
+        image: NetworkImage( movie.getPosterImg() ),
+        width: 50.0,
+        fit: BoxFit.cover,
+      ),
     );
 
   }

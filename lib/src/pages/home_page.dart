@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/src/providers/peliculas_provider.dart';
+import 'package:movie_app/bloc/movies_bloc.dart';
 import 'package:movie_app/search/search_delegate.dart';
 
 import 'package:movie_app/src/widgets/card_swiper_widget.dart';
@@ -7,12 +7,14 @@ import 'package:movie_app/src/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
   
-  final moviesProvider = new MoviesProvider();
+  final MoviesBloc bloc;
+
+  HomePage({this.bloc});
 
   @override
   Widget build(BuildContext context) {
 
-    moviesProvider.getPopular();
+    // moviesProvider.getPopular();
 
     return Scaffold(
         appBar: AppBar(
@@ -45,7 +47,7 @@ class HomePage extends StatelessWidget {
 
   Widget _swiperCards() {
     return FutureBuilder(
-      future: moviesProvider.getOnScreen(),
+      future: bloc.getOnScreen(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
           return CardSwiper(movies: snapshot.data);
@@ -74,12 +76,12 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(height: 15.0),
           StreamBuilder(
-            stream: moviesProvider.popularStream,
+            stream: bloc.popularStream,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               return snapshot.hasData
               ? MovieHorizontal(
                   movies: snapshot.data,
-                  nextPage: moviesProvider.getPopular,                  
+                  nextPage: bloc.getPopular,                  
                 )
               : Container(
                 height: MediaQuery.of(context).size.height * 0.2,

@@ -14,7 +14,7 @@ class MoviesProvider {
 
   int _popularPage = 0;
   // int _searchPage = 0;
-
+  int _actorFilmPage = 0;
 
   bool _loading = false;
   
@@ -22,15 +22,13 @@ class MoviesProvider {
   List<Movie> _searchResults = new List();
   
   final _popularStreamController = StreamController<List<Movie>>.broadcast();
-
   Function(List<Movie>) get popularSink => _popularStreamController.sink.add;
-  
   Stream<List<Movie>> get popularStream => _popularStreamController.stream;
   
-
   void disposeStreams() {
     _popularStreamController?.close();
   }
+
 
 
   Future<List<Movie>> _processResponse(Uri url) async {
@@ -118,7 +116,6 @@ class MoviesProvider {
     _loading = true;
 
     // searchPage++;
-    print('PAGINAAAAAAAAAAA $searchPage');
 
     final url = Uri.https(_url, '3/search/movie', {
       'api_key'   : _apiKey,
@@ -127,11 +124,7 @@ class MoviesProvider {
       'page'      : searchPage.toString(),
     });
 
-    print(url);
-
     final resp = await _processResponse(url); 
-
-    print(resp);
 
     _searchResults.addAll(resp);
     popularSink( _searchResults );
@@ -141,6 +134,33 @@ class MoviesProvider {
 
     return resp;
 
+  }
+
+  Future<List<Movie>> getFilmography( Actor actor ) async {
+
+    if ( _loading ) return [];
+
+    _loading = true;
+
+    _actorFilmPage++;
+
+    final url = Uri.https(_url, '3/discover/movie', {
+      'api_key'   : _apiKey,
+      'language'  : _language,
+      'page'      : _actorFilmPage.toString(),
+      'with_cast'     : actor.id.toString(),
+    });
+
+    print(url);
+
+    final resp = await _processResponse(url); 
+
+    _popular.addAll(resp);
+    popularSink( _popular );
+
+    _loading = false;
+
+    return resp;
   }
 
 }

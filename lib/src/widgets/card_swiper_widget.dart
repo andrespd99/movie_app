@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie_app/src/models/movie_model.dart';
+import 'package:movie_app/src/pages/movie_details_page.dart';
 
 class CardSwiper extends StatelessWidget {
   final List<Movie> movies;
@@ -33,7 +34,10 @@ class CardSwiper extends StatelessWidget {
                   )            
                 ),
                 onTap: () {
-                  Navigator.pushNamed( context, 'detail', arguments: movies[index] );
+                  Navigator.pushNamed(
+                    context, 'detail', 
+                    arguments: MovieDetailsArguments(movies[index]), 
+                  );
                 },
               ),
             ),

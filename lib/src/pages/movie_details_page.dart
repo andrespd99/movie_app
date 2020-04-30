@@ -10,11 +10,12 @@ class MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Movie movie = ModalRoute.of(context).settings.arguments;
-    
-    return Scaffold(
-      
+    final MovieDetailsArguments args  = ModalRoute.of(context).settings.arguments;
 
+    final Movie movie = args.movie;
+    final bool hasHero = args.hasHero;
+
+    return Scaffold(
       body: Center(
         child: CustomScrollView(
           slivers: <Widget>[
@@ -23,7 +24,7 @@ class MovieDetails extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   SizedBox( height: 20.0 ),
-                  _posterTitle( context, movie ),
+                  _posterTitle( context, movie, hasHero ),
                   _descripcion( movie ),
                   SizedBox( height: 20.0 ),
                   _createCasting( movie ),
@@ -69,7 +70,7 @@ class MovieDetails extends StatelessWidget {
       );
   }
 
-  Widget _posterTitle( BuildContext context, Movie movie ) {
+  Widget _posterTitle( BuildContext context, Movie movie, bool hasHero ) {
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal:   20.0),
@@ -85,17 +86,10 @@ class MovieDetails extends StatelessWidget {
                 )
               ]
             ),
-            child: Hero(
-              tag: movie.uniqueId,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(7.0),
-                child: Image(
-                  image: NetworkImage( movie.getPosterImg() ),
-                  height: 160.0,
-                ),
-              ),
+            child: hasHero 
+                  ? Hero( tag: movie.uniqueId, child: _getPoster(movie) )
+                  : _getPoster(movie)
             ),
-          ),
           SizedBox(width: 15.0,),
           Flexible(
             child: Column(
@@ -174,34 +168,60 @@ class MovieDetails extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 10.0),
       // color: Colors.red,
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(7.0),
-            child: FadeInImage(
-              placeholder: AssetImage('assets/img/actor-placeholder.jpg'),
-              image: NetworkImage( actor.getActorPhoto() ),
-              fit: BoxFit.cover,
-              height: 165.0,
-            ),
-          ),
-          SizedBox( height: 5.0 ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(left: 3.0),
-              child: Text(
-                actor.name,
-                style: Theme.of(context).textTheme.caption,
-                overflow: TextOverflow.ellipsis,  
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, 'actorDetail', arguments: actor);
+        },
+        child: Column(
+          children: <Widget>[
+            Hero(
+              tag: actor.id,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7.0),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/img/actor-placeholder.jpg'),
+                  image: NetworkImage( actor.getActorPhoto() ),
+                  fit: BoxFit.cover,
+                  height: 165.0,
+                ),
               ),
             ),
-          )
-        ],
+            SizedBox( height: 5.0 ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 3.0),
+                child: Text(
+                  actor.name,
+                  style: Theme.of(context).textTheme.caption,
+                  overflow: TextOverflow.ellipsis,  
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
 
   }
 
+  Widget _getPoster( Movie movie ) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(7.0),
+      child: Image(
+        image: NetworkImage( movie.getPosterImg() ),
+        height: 160.0,
+      ),
+    );
+  }
+
+
+}
+
+class MovieDetailsArguments {
+  Movie movie;
+  bool hasHero;
+
+  MovieDetailsArguments(this.movie, {this.hasHero = true}); 
 
 }

@@ -2,61 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:movie_app/src/models/movie_model.dart';
-import 'package:movie_app/src/providers/peliculas_provider.dart';
+import 'package:movie_app/src/pages/movie_details_page.dart';
 
 class SearchResults extends StatelessWidget {
 
   final List<Movie> movies;
-  final Function nextPage;
-  final _searchController = new TextEditingController();
-
-  
+  final Function nextPage;  
   
   SearchResults({@required this.movies, @required this.nextPage, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-
-    final itemWidth = 132.0;
-    final itemHeight = 210.0;
-    
     return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: _createGridView(itemWidth, itemHeight)
+      // child: child,
     );
-    
-  }
-
-  Widget _makeAppBar( ) {
-
-    return SliverAppBar(
-      backgroundColor: Colors.pinkAccent,
-      floating: true,
-      expandedHeight: 100.0,
-      leading: IconButton(
-        icon: Icon( Icons.arrow_back ),
-        onPressed: () {},
-      ),
-      flexibleSpace: FlexibleSpaceBar(
-        title: Row(
-          children: <Widget>[
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: Icon( Icons.cancel ),
-                  onPressed: () {
-                    _searchController.clear();
-                  },
-                )
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-
   }
 
   Widget _createGridView( double itemWidth, double itemHeight ) {
@@ -110,7 +69,7 @@ class SearchResults extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(left: 3.0),
                   child: Text(
-                    movie.title, 
+                    '${movie.title} (${movie.releaseDate.substring(0, 4)})', 
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Theme.of(context).textTheme.caption,
@@ -124,7 +83,7 @@ class SearchResults extends StatelessWidget {
       return GestureDetector(
         child: card,
         onTap: () {
-          Navigator.pushNamed(context, 'detail', arguments: movie);
+          Navigator.pushNamed(context, 'detail', arguments: MovieDetailsArguments(movie));
         },
       );
 
