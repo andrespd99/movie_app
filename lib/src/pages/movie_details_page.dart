@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:movie_app/singletons/movies_bloc.dart';
+
 import 'package:movie_app/src/models/cast_model.dart';
 import 'package:movie_app/src/models/movie_model.dart';
-import 'package:movie_app/src/providers/peliculas_provider.dart';
 
 class MovieDetails extends StatelessWidget {
-  
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MovieDetails extends StatelessWidget {
                   _posterTitle( context, movie, hasHero ),
                   _descripcion( movie ),
                   SizedBox( height: 20.0 ),
-                  _createCasting( movie ),
+                  _createCasting( moviesBloc, movie ),
                   SizedBox( height: 50.0 ),
                 ]
               ),
@@ -124,12 +124,10 @@ class MovieDetails extends StatelessWidget {
 
   }
 
-  Widget _createCasting( Movie movie ) {
-    
-    final moviesProvider = new MoviesProvider();
+  Widget _createCasting( MoviesBloc bloc, Movie movie ) {
 
     return FutureBuilder<List<Actor>>(
-      future: moviesProvider.getCast( movie.id.toString() ),
+      future: bloc.getCast( movie.id.toString() ),
       builder: (context, AsyncSnapshot<List<Actor>> snapshot) {
         
         if( snapshot.hasData ) {

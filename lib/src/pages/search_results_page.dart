@@ -14,7 +14,7 @@ class SearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // child: child,
+      child: _createGridView(itemWidth, itemHeight),
     );
   }
 

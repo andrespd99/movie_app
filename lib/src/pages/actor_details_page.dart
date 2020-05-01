@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:movie_app/singletons/movies_bloc.dart';
+
+import 'package:movie_app/src/widgets/movie_horizontal_future.dart';
+
 import 'package:movie_app/src/models/cast_model.dart';
-import 'package:movie_app/src/providers/peliculas_provider.dart';
-import 'package:movie_app/src/widgets/movie_horizontal.dart';
+import 'package:movie_app/src/models/movie_model.dart';
 
 class ActorDetails extends StatelessWidget {
-  
-  final moviesProvider = new MoviesProvider();
 
   @override
   Widget build(BuildContext context) {
 
-  
   final Actor actor = ModalRoute.of(context).settings.arguments;
   
-  moviesProvider.getFilmography(actor);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -30,7 +28,7 @@ class ActorDetails extends StatelessWidget {
           SizedBox(height: 10.0),
           _actorDetails( context, actor ),
           SizedBox(height: 20.0,),
-          _footer( context ),
+          _footer( context, moviesBloc, actor ),
         ],
       ),
     );
@@ -62,9 +60,6 @@ class ActorDetails extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          // child: Text(actor),
-        )
       ],
     );
   }
@@ -73,7 +68,7 @@ class ActorDetails extends StatelessWidget {
 
   }
 
-  Widget _footer(BuildContext context) {
+  Widget _footer(BuildContext context, MoviesBloc bloc, Actor actor) {
     
     return Container(
       width: double.infinity,
@@ -85,14 +80,11 @@ class ActorDetails extends StatelessWidget {
             child: Text('Filmography', style: Theme.of(context).textTheme.subhead,),
           ),
           SizedBox(height: 15.0),
-          StreamBuilder(
-            stream: moviesProvider.popularStream,
-            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          FutureBuilder(
+            future: bloc.getFilmography(actor),
+            builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
               return snapshot.hasData
-              ? MovieHorizontal(
-                  movies: snapshot.data,
-                  nextPage: moviesProvider.getFilmography,                  
-                )
+              ? MovieHorizontalFuture(snapshot.data)
               : Container(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Center(

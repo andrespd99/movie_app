@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/bloc/movies_bloc.dart';
+
+import 'package:movie_app/singletons/movies_bloc.dart';
+
 import 'package:movie_app/search/search_delegate.dart';
 
 import 'package:movie_app/src/widgets/card_swiper_widget.dart';
@@ -7,14 +9,8 @@ import 'package:movie_app/src/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
   
-  final MoviesBloc bloc;
-
-  HomePage({this.bloc});
-
   @override
   Widget build(BuildContext context) {
-
-    // moviesProvider.getPopular();
 
     return Scaffold(
         appBar: AppBar(
@@ -37,15 +33,15 @@ class HomePage extends StatelessWidget {
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              _swiperCards(),
+              _swiperCards(moviesBloc),
               SizedBox(height: 25.0),
-              _footer(context),  
+              _footer(context, moviesBloc),  
             ],
           ),
         ));
   }
 
-  Widget _swiperCards() {
+  Widget _swiperCards(MoviesBloc bloc) {
     return FutureBuilder(
       future: bloc.getOnScreen(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -63,7 +59,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _footer(BuildContext context) {
+  Widget _footer(BuildContext context, MoviesBloc bloc) {
     
     return Container(
       width: double.infinity,

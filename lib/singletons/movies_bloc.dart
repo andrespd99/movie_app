@@ -7,6 +7,17 @@ import 'package:movie_app/src/models/cast_model.dart';
 import 'package:movie_app/src/models/movie_model.dart';
 
 class MoviesBloc {
+  /* We declare the class as a singleton */
+  static final MoviesBloc _moviesBloc = new MoviesBloc._internal();
+  
+  factory MoviesBloc() {
+    return _moviesBloc;
+  }
+
+  MoviesBloc._internal(){
+    this.getPopular();
+    _trendingMoviesList.addAll(this._popularMovies);
+  }
 
   /* Our initial data for the REST API */
   String _apiKey = '33f176cad5a87619b85dc9788614f8f5';
@@ -19,6 +30,8 @@ class MoviesBloc {
   List<Movie> _popularMovies = new List();
   List<Movie> _suggestedMovies = new List();
   List<Movie> _trendingMoviesList = new List();
+
+  List<Movie> _historySearch = new List();
 
   /* Getter of trending movies for search suggestion view when query is empty */
   List<Movie> get trendingMovies => _trendingMoviesList;
@@ -41,12 +54,9 @@ class MoviesBloc {
     _moviesSuggestionsStreamController?.close();
   }
 
-  MoviesBloc() {
-    this.getPopular();
-    _trendingMoviesList.addAll(this._popularMovies);
-  }
-
   Uri _getUrl(String getUrl, [Map<String, String> arguments]) {
+
+    if( arguments == null) arguments = {};
 
     final Map<String, String> httpsArgs = {
       'api_key'   : _apiKey,
@@ -74,7 +84,7 @@ class MoviesBloc {
 
   Future<List<Movie>> getOnScreen() async {
 
-    final url = _getUrl('movie/now_playing');
+    final url = _getUrl('/movie/now_playing');
 
     return await _processResponse(url);
 
@@ -89,7 +99,7 @@ class MoviesBloc {
 
     final url = _getUrl('/movie/popular', 
                         {'page' : _popularPage.toString()});
-
+    
     final resp = await _processResponse(url); 
 
     _popularMovies.addAll(resp);
@@ -140,6 +150,59 @@ class MoviesBloc {
     
   }
 
+  Future<List<Actor>> getCast( String movieId ) async {
+    
+    /* Primero construimos el URL */
+    final url = _getUrl('/movie/$movieId/credits');
+
+    /* Ahora guardamos la respuesta de la solicitud GET a dicho URL */
+    final resp = await http.get(url);
+    /* De esa respuesta, extraemos el body que es el Map del contenido del JSON  */
+    /* decodedData es de tipo Map */
+    final decodedData = json.decode( resp.body );
+    /* Extraemos de ese Map el contenido del atributo cast y lo convertimos en un objeto de tipo
+      Cast */
+    final cast = new Cast.fromJsonList( decodedData['cast'] );
+
+    /* Retornamos la lista de actores del objeto Cast */
+    return cast.actors;
+
+  }
+
+  Future<List<Movie>> suggestMovies( String query ) async {
+
+    final url = Uri.https(_url, "3/search/movie", {
+      'api_key' : _apiKey,
+      'language': _language,
+      'query'   : query,
+    });
+    
+    return await _processResponse(url);
+  }
+
+  Future<List<Movie>> getSearchResults( String query, int searchPage ) async {
+
+    if ( _loading ) return [];
+
+    _loading = true;
+
+    // searchPage++;
+
+    final url = _getUrl('search/movie', {
+      'query'     : query,
+      'page'      : searchPage.toString(),
+    });
+
+    final resp = await _processResponse(url); 
+
+    _historySearch.addAll(resp);
+
+    _loading = false;
+
+    return resp;
+  }
+
 
 }
 
+final moviesBloc = MoviesBloc();

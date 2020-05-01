@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/src/pages/movie_details_page.dart';
-import 'package:movie_app/src/pages/search_results_page.dart';
-import 'package:movie_app/src/providers/peliculas_provider.dart';
+
+import 'package:movie_app/singletons/movies_bloc.dart';
 
 import 'package:movie_app/src/models/movie_model.dart';
 
+import 'package:movie_app/src/pages/movie_details_page.dart';
+import 'package:movie_app/src/pages/search_results_page.dart';
+
+
 class DataSearch extends SearchDelegate {
   
-  final moviesProvider = new MoviesProvider();
-
   final popularMovies = new List<Movie>();
 
   final lastSearchMovies = List<Movie>();
@@ -64,11 +65,11 @@ class DataSearch extends SearchDelegate {
     /* Son las sugerencias que aparecen cuando el usuario escribe */
     popularMovies.clear();
     /* Obtenemos las peliculas populares del momento */
-    moviesProvider.getPopular().then( (p) => popularMovies.addAll(p.toList()) );
+    moviesBloc.getPopular().then( (p) => popularMovies.addAll(p.toList()) );
 
     if( query.isEmpty ) {
       return StreamBuilder(
-        stream: moviesProvider.popularStream,
+        stream: moviesBloc.popularStream,
         builder: ( context, AsyncSnapshot<List<Movie>> snapshot ) {
           if(!snapshot.hasData) {
             return Center(
@@ -117,7 +118,7 @@ class DataSearch extends SearchDelegate {
 
   FutureBuilder<List<Movie>> _getMovieSearch() {
     return FutureBuilder (
-        future: moviesProvider.searchMovie( query ),
+        future: moviesBloc.suggestMovies( query ),
         builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
 
           if( snapshot.hasData ){
@@ -171,18 +172,17 @@ class DataSearch extends SearchDelegate {
       );
   }
 
-  FutureBuilder<List<Movie>> _getSearchResults () {
+  FutureBuilder<List<Movie>> _getSearchResults() {
 
     final searchPage = 1;
 
     return FutureBuilder(
-      future: moviesProvider.getSearchResults( query, searchPage ),
+      future: moviesBloc.getSearchResults( query, searchPage ),
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
-
         if(snapshot.hasData){
           return SearchResults( 
             movies: snapshot.data, 
-            nextPage: moviesProvider.getSearchResults,
+            nextPage: moviesBloc.getSearchResults,
           );
         } else {
           return Center(child: CircularProgressIndicator());

@@ -10,10 +10,9 @@ class Cast {
     if( jsonList == null ) return;
 
     jsonList.forEach( ( actor ) {
-      // final newActor = Actor.fromJsonMap(actor);
-      final actorId = Actor.fromJsonMap(actor).id;
-
-      // actors.add( newActor );
+      final newActor = Actor.fromJsonMap(actor);
+      // final actorId = Actor.fromJsonMap(actor).id;
+      actors.add( newActor );
     });    
   }
 }
