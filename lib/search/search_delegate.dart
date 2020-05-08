@@ -9,14 +9,6 @@ import 'package:movie_app/src/pages/search_results_page.dart';
 
 
 class DataSearch extends SearchDelegate {
-  
-  final popularMovies = new List<Movie>();
-
-  final lastSearchMovies = List<Movie>();
-
-
-  // final recentMovies = [];
-
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -62,58 +54,48 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    /* Son las sugerencias que aparecen cuando el usuario escribe */
-    popularMovies.clear();
-    /* Obtenemos las peliculas populares del momento */
-    moviesBloc.getPopular().then( (p) => popularMovies.addAll(p.toList()) );
-
+    
     if( query.isEmpty ) {
-      return StreamBuilder(
-        stream: moviesBloc.popularStream,
-        builder: ( context, AsyncSnapshot<List<Movie>> snapshot ) {
-          if(!snapshot.hasData) {
-            return Center(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );        
-          } 
 
+      if( query.isEmpty ) {
+        
+        return _getEmptyQueryView(context);
 
-          return ListView(
-            children: <Widget> [
-              SizedBox(height: 5.0),
-              ListTile(
-                title: Text(
-                  "Trending", 
-                  style: Theme.of(context).textTheme.title,
-                ),
-              ),
-              Divider( height: 3.0 )
-            ] +
-              snapshot.data.map<ListTile>( (movie) {
-                return ListTile(
-                  title: Text(
-                    movie.title, 
-                    style: TextStyle(color: Colors.pinkAccent),),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context, 'detail', 
-                      arguments: MovieDetailsArguments( movie, hasHero: false ),
-                    );
-                  },
-                );
-              }).toList(),
-          );
+      } else {
 
-        }
-      );
-    } else {
-      
-      return _getMovieSearch();
+        return _getMovieSearch();
+
+      }
 
     }
+  }
 
+  Widget _getEmptyQueryView(BuildContext context) {
+    return ListView(
+          children: <Widget> [
+            SizedBox(height: 5.0),
+            ListTile(
+              title: Text(
+                "Trending", 
+                style: Theme.of(context).textTheme.title,
+              ),
+            ),
+            Divider( height: 3.0 )
+          ] +
+            moviesBloc.trendingMovies.map<ListTile>( (movie) {
+              return ListTile(
+                title: Text(
+                  movie.title, 
+                  style: TextStyle(color: Colors.pinkAccent),),
+                onTap: () {
+                  Navigator.pushNamed(
+                    context, 'detail', 
+                    arguments: MovieDetailsArguments( movie, hasHero: false ),
+                  );
+                },
+              );
+            }).toList(),
+        );
   }
 
   FutureBuilder<List<Movie>> _getMovieSearch() {
@@ -208,34 +190,5 @@ class DataSearch extends SearchDelegate {
     );
 
   }
-
-
-  // @override
-  // Widget buildSuggestions(BuildContext context) {
-  //   /* Son las sugerencias que aparecen cuando el usuario escribe */
-
-  //   final listaSugerida = ( query.isEmpty ) 
-  //                           ? peliculasRecientes 
-  //                           : peliculas.where( 
-  //                             (p) => p.toLowerCase().startsWith( query.toLowerCase() 
-  //                           )).toList();
-    
-
-  //   return ListView.builder(
-  //     itemCount: listaSugerida.length,
-  //     itemBuilder: ( context, i ) {
-        
-  //       return ListTile(
-  //         leading: Icon( Icons.movie ),
-  //         title: Text( listaSugerida[i] ),
-  //         onTap: () {
-  //           seleccion = listaSugerida[i];
-  //           showResults( context );
-  //         },
-  //       );
-
-  //     }
-  //   );
-  // }
 
 }

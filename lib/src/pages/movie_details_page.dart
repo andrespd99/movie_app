@@ -4,6 +4,7 @@ import 'package:movie_app/singletons/movies_bloc.dart';
 
 import 'package:movie_app/src/models/cast_model.dart';
 import 'package:movie_app/src/models/movie_model.dart';
+import 'package:movie_app/src/widgets/rating.dart';
 
 class MovieDetails extends StatelessWidget {
   
@@ -95,14 +96,20 @@ class MovieDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start  ,
               children: <Widget> [
-                Text( movie.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis ),
-                Text( movie.originalTitle, style: Theme.of(context).textTheme.subhead, overflow: TextOverflow.clip ),
+                Text( 
+                  '${movie.title} (${movie.releaseYear})', 
+                  style: Theme.of(context).textTheme.title, 
+                  overflow: TextOverflow.ellipsis, 
+                ),
+                Text( 
+                  movie.originalTitle, 
+                  style: Theme.of(context).textTheme.subhead, 
+                  overflow: TextOverflow.clip 
+                ),
                 SizedBox(height: 5.0),
                 Row(
-                  children: <Widget>[
-                    Icon( Icons.star_border ),
-                    Text( movie.voteAverage.toString() ),
-                  ],
+                  children: rating( movie.voteAverage )
+                  + [Text( movie.voteAverage.toString() )],
                 )
               ],  
             ),
@@ -168,7 +175,7 @@ class MovieDetails extends StatelessWidget {
       // color: Colors.red,
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, 'actorDetail', arguments: actor);
+          Navigator.pushNamed(context, 'actorDetail');
         },
         child: Column(
           children: <Widget>[
@@ -185,16 +192,26 @@ class MovieDetails extends StatelessWidget {
               ),
             ),
             SizedBox( height: 5.0 ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 3.0),
-                child: Text(
-                  actor.name,
-                  style: Theme.of(context).textTheme.caption,
-                  overflow: TextOverflow.ellipsis,  
+            Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    actor.name,
+                    style: Theme.of(context).textTheme.caption,
+                    overflow: TextOverflow.ellipsis,  
+                  ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'as ${actor.character}',
+                    style: Theme.of(context).textTheme.caption
+                                                      .copyWith( fontSize: 10.3 ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              ],
             )
           ],
         ),

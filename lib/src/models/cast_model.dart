@@ -1,7 +1,10 @@
 
+import 'package:movie_app/singletons/movies_bloc.dart';
+
 class Cast {
 
   List<Actor> actors = new List();
+  // List<ActorDetailed> actorsDetails = new List();
 
   Cast();
 
@@ -11,7 +14,6 @@ class Cast {
 
     jsonList.forEach( ( actor ) {
       final newActor = Actor.fromJsonMap(actor);
-      // final actorId = Actor.fromJsonMap(actor).id;
       actors.add( newActor );
     });    
   }
@@ -26,6 +28,14 @@ class Actor {
   String name;
   int order;
   String profilePath;
+  // ///////
+  // String birthday;
+  // dynamic deathday;
+  // String biography;
+  // double popularity;
+  // String placeOfBirth;
+  // String imdbId;
+  // dynamic homepage;
 
   Actor({
     this.castId,
@@ -38,7 +48,7 @@ class Actor {
     this.profilePath,
   });
 
-  Actor.fromJsonMap( Map<String, dynamic> json ) {
+  Actor.fromJsonMap( Map<String, dynamic> json) {
     castId        = json['cast_id'];
     character     = json['character'];
     creditId      = json['credit_id'];
@@ -47,6 +57,13 @@ class Actor {
     name          = json['name'];
     order         = json['order'];
     profilePath   = json['profile_path'];
+    // birthday      = jsonDetails['birthday'];
+    // deathday      = jsonDetails['deathday'];
+    // biography     = jsonDetails['biography'];
+    // popularity    = jsonDetails['popularity'];
+    // placeOfBirth  = jsonDetails['place_of_birth'];
+    // imdbId        = jsonDetails['imdb_id'];
+    // homepage      = jsonDetails['homepage'];
   }
 
   getActorPhoto() {
@@ -60,5 +77,4 @@ class Actor {
   }
 
 }
-
 

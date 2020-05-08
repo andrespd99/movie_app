@@ -16,6 +16,7 @@ class MoviesBloc {
 
   MoviesBloc._internal(){
     this.getPopular();
+    print(_popularMovies.length);
     _trendingMoviesList.addAll(this._popularMovies);
   }
 
@@ -124,7 +125,6 @@ class MoviesBloc {
   
   }
 
-
   Future<List<Movie>> getFilmography( Actor actor ) async {
 
     List<Movie> filmography = new List();
@@ -202,6 +202,18 @@ class MoviesBloc {
     return resp;
   }
 
+  // Future<ActorDetailed> getActorDetails( int id ) async {
+
+  //   final url = _getUrl('person/$id');
+
+  //   final resp = await http.get(url);
+  //   final decodedData = json.decode( resp.body );
+
+  //   final actor = ActorDetailed.fromJsonMap(decodedData);
+
+  //   return actor;
+
+  // }
 
 }
 

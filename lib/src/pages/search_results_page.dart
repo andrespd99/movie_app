@@ -10,10 +10,14 @@ class SearchResults extends StatelessWidget {
   final Function nextPage;  
   
   SearchResults({@required this.movies, @required this.nextPage, Key key}) : super(key: key);
+  
+  final itemWidth = 132.0;
+  final itemHeight = 210.0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 10.0),
       child: _createGridView(itemWidth, itemHeight),
     );
   }

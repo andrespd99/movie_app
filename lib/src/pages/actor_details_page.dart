@@ -7,8 +7,8 @@ import 'package:movie_app/src/widgets/movie_horizontal_future.dart';
 import 'package:movie_app/src/models/cast_model.dart';
 import 'package:movie_app/src/models/movie_model.dart';
 
-class ActorDetails extends StatelessWidget {
-
+class ActorDetails extends StatelessWidget { 
+ 
   @override
   Widget build(BuildContext context) {
 

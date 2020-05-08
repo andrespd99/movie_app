@@ -36,6 +36,7 @@ class Movie {
   double voteAverage;
   String overview;
   String releaseDate;
+  String releaseYear;
 
   Movie({
     this.popularity,
@@ -52,7 +53,9 @@ class Movie {
     this.voteAverage,
     this.overview,
     this.releaseDate,
-  });
+  }) {
+    this.releaseYear = this.releaseDate.substring(0, 4);
+  }
 
   Movie.fromJsonMap( Map<String, dynamic> json ) {
     popularity        = json['popularity'] / 1;
@@ -69,6 +72,8 @@ class Movie {
     voteAverage       = json['vote_average'] / 1;
     overview          = json['overview'];
     releaseDate       = json['release_date'];
+    
+    this.releaseYear = releaseDate.substring(0, 4);
   }
 
   getPosterImg() {
